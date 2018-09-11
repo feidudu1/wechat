@@ -31,8 +31,9 @@ module.exports = async (ctx) => {
         isbn, openid, rate, title, image, alt, publisher, summary, price, tags, author
       })
       ctx.state.data = {
+        code: 0,
         data: {rate, title, image, alt, publisher, summary, price, tags, author},
-        msg: 'success'
+        msg: 'success',
       }
     } catch (e) {
       ctx.state = {
@@ -42,8 +43,6 @@ module.exports = async (ctx) => {
         }
       }
     }
-
-    console.log({rate, title, image, alt, publisher, summary, price, tags, author});
   }
 }
 
