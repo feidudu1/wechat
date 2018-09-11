@@ -21,7 +21,7 @@ const DB = require('knex')({
         user: config.user,
         password: config.pass,
         database: config.db,
-        charset: config.char,
+        charset: 'config.char',
         multipleStatements: true
     }
 })
