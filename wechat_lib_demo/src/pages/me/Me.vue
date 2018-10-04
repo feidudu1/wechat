@@ -14,7 +14,7 @@
 <script>
 import YearProgress from '@/components/YearProgress'
 import config from '@/config'
-import {showSuccess, post, get, showModal} from '@/util'
+import {showSuccess, post, get, showModel} from '@/util'
 import qcloud from 'wafer2-client-sdk'
 
 export default {
@@ -51,7 +51,7 @@ export default {
       })
       console.log('res', res);
       if (res.code === 0 && res.data.title) {
-        showModal('添加成功', `${res.data.title}添加成功`)
+        showModel('添加成功', `${res.data.title}添加成功`)
       //   showSuccess('添加成功', res.data.title + '添加成功')
       }
     },

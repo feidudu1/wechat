@@ -17,7 +17,7 @@ export function request(url, method, data) {
         if (res.data.code === 0) {
           reslove(res.data.data)
         } else {
-          showModal('失败', res.data.data.msg)
+          showModel('失败', res.data.data.msg)
           reject(res.data)
         }
       }
@@ -25,8 +25,8 @@ export function request(url, method, data) {
   })
 }
 
-export function showModal (title, content) {
-  wx.showModal({
+export function showModel (title, content) {
+  wx.showModel({
     title,
     content,
     showCancel: false

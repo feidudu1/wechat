@@ -1,5 +1,5 @@
 <template>
-  <div class="">
+  <div class="detail">
     <BookInfo :info="info"></BookInfo>
     <div class="comment">
       <textarea v-model="comment" class="textarea" maxlength="100" placeholder="请输入图书短评"></textarea>
@@ -13,18 +13,20 @@
         <switch color="#EA5A49" @change="getPhone" :checked="phone"></switch>
         <span class="text-primary">{{phone}}</span>
       </div>
+      <button class="btn" @click="addComment">评论</button>
     </div>
 
   </div>
 </template>
 
 <script>
-import {get} from '@/util'
+import {get, post, showModel} from '@/util'
 import BookInfo from '@/components/BookInfo'
 import {BMapWX as bmap} from '@/libs/bmap-wx.js'
 export default {
   data () {
     return {
+      userinfo: {},
       bookid: '',
       info: {},
       comment: '',
@@ -76,11 +78,35 @@ export default {
         this.phone = ''
       }
     },
+    async addComment () {
+      // 评论内容 手机型号 地理位置 图书id 用户open_id
+      let {comment, phone, location, userinfo} = this
+      if (!comment) {
+        return
+      }
+      const data = {
+        openid: userinfo.openId,
+        bookid: this.bookid,
+        comment: comment,
+        phone: phone,
+        location: location
+      }
+      try {
+        await post('/weapp/addcomment', data)
+        this.comment = ''
+      } catch (e) {
+        showModel('失败', e)
+      }
+    }
   },
 
   mounted () {
     this.bookid = this.$root.$mp.query.id
     this.getDetail()
+    const userinfo = wx.getStorageSync('userinfo')
+    if (userinfo) {
+      this.userinfo = userinfo
+    }
   }
 }
 </script>
@@ -88,7 +114,6 @@ export default {
 <style scoped lang="scss">
   .comment{
     margin-top:10px;
-    margin-bottom: 20px;
     .textarea{
       width:730rpx;
       height:200rpx;
