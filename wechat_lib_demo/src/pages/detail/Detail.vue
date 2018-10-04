@@ -21,13 +21,15 @@
 <script>
 import {get} from '@/util'
 import BookInfo from '@/components/BookInfo'
+import {BMapWX as bmap} from '@/libs/bmap-wx.js'
 export default {
   data () {
     return {
       bookid: '',
       info: {},
       comment: '',
-      phone: ''
+      phone: '',
+      location: ''
     }
   },
 
@@ -43,8 +45,28 @@ export default {
       })
       this.info = info
     },
-    getGeo () {
-
+    getGeo (e) {
+      const ak = '9q9lOKpbhLBzVII2YXk3kEGnppvL1IHu'
+      let BMap = new bmap({
+        ak: ak
+      })
+      let that = this
+      if (e.target.value) {
+        wx.getLocation({
+          success: geo => {
+            BMap.regeocoding({
+              fail: data => {
+                this.location = '未知地点'
+              },
+              success: res => {
+                that.location = res.wxMarkerData && res.wxMarkerData[0] && res.wxMarkerData[0].address || '未知地点'
+              }
+            })
+          }
+        })
+      } else {
+        this.location = ''
+      }
     },
     getPhone (e) {
       if (e.target.value) {
