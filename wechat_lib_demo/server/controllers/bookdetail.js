@@ -1,4 +1,3 @@
-const https = require('https')
 const {mysql} = require('../qcloud')
 
 module.exports = async (ctx) => {

@@ -1,7 +1,7 @@
 <template>
   <a :href="detailUrl">
     <div class="book-card">
-      <div class="thumb">
+      <div class="thumb" @click.stop="preview">
         <img :src="book.image" alt="" class="img" mode="aspectFit">
       </div>
       <div class="detail">
@@ -17,8 +17,8 @@
           <div class="">
             {{book.author}}
           </div>
-          <div class="">
-            {{book.count}}
+          <div class="text-primary">
+            浏览量：{{book.count}}
           </div>
         </div>
         <div class="row">
@@ -45,6 +45,14 @@ export default {
   },
   components: {
     Rate
+  },
+  methods: {
+    preview () {
+      wx.previewImage({
+        current: this.book.image,
+        urls:[this.book.image]
+      })
+    }
   }
 }
 </script>
@@ -76,11 +84,8 @@ export default {
         justify-content: space-between;
         margin-right: 15px;
       }
-      .right{
-        float: right;
-      }
-      .left{
-        margin-right:80px;
+      .row div:first-child {
+        margin-right: 20px;
       }
     }
 
