@@ -28,6 +28,10 @@ export default {
 </script>
 
 <style>
+  .flex {
+    display: flex;
+    justify-content: space-between;
+  }
   .text-footer {
     text-align: center;
     font-size: 12px;
