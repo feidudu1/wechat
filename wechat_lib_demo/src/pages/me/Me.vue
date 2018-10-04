@@ -50,7 +50,6 @@ export default {
         openid: this.userinfo.openId
       })
       console.log('res', res);
-      debugger
       if (res.code === 0 && res.data.title) {
         showModal('添加成功', `${res.data.title}添加成功`)
       //   showSuccess('添加成功', res.data.title + '添加成功')

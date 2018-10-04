@@ -5,27 +5,27 @@
     </div>
     <div class="detail">
       <div class="row">
-        <div class="right text-primary">
-          {{book.rate}} <Rate :value="book.rate"></Rate>
-        </div>
-        <div class="left text-primary">
+        <div class="text-primary">
           {{book.title}}
         </div>
+        <div class="text-primary">
+          {{book.rate}} <Rate :value="book.rate"></Rate>
+        </div>
       </div>
       <div class="row">
-        <div class="right">
-          浏览量
-        </div>
-        <div class="left">
+        <div class="">
           {{book.author}}
         </div>
+        <div class="">
+          浏览量
+        </div>
       </div>
       <div class="row">
-        <div class="right">
-          添加人
-        </div>
-        <div class="left">
+        <div class="">
           {{book.publisher}}
+        </div>
+        <div class="">
+          {{book.user_info.nickName}}
         </div>
       </div>
     </div>
@@ -65,6 +65,9 @@ export default {
       .row{
         line-height:20px;
         margin-bottom:3px;
+        display: flex;
+        justify-content: space-between;
+        margin-right: 15px;
       }
       .right{
         float: right;

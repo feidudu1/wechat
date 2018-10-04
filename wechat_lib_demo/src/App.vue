@@ -28,6 +28,12 @@ export default {
 </script>
 
 <style>
+  .text-footer {
+    text-align: center;
+    font-size: 12px;
+    margin-bottom: 5px;
+    color: #eee;
+  }
   .text-primary {
     color: #EA5149;
   }
