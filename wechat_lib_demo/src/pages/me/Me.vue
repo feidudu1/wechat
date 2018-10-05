@@ -19,11 +19,13 @@ import qcloud from 'wafer2-client-sdk'
 
 export default {
   data () {
+    let user = wx.getStorageSync('userinfo')
     return {
       // userinfo: {
       //   avatarUrl: '@/static/img/me.png',
       //   nickName: ''
       // }
+      user: user
     }
   },
 
@@ -32,12 +34,12 @@ export default {
   },
   computed: {
     userinfo () {
-      let user = wx.getStorageSync('userinfo')
+      let {user} = this
       if (user) {
         return user
       } else {
         return {
-          avatarUrl: '@/static/img/me.png',
+          avatarUrl: '../../../static/img/me-active.png',
           nickName: ''
         }
       }
@@ -76,7 +78,7 @@ export default {
               console.log('登录成功信息', userinfo);
               showSuccess('登录成功')
               wx.setStorageSync('userinfo', userinfo)
-              that.userinfo = userinfo
+              that.user = userinfo
           },
           fail: function (err) {
               console.log('登录失败', err);
